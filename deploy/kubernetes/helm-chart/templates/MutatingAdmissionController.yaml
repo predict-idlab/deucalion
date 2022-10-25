@@ -19,7 +19,7 @@ webhooks:
     clientConfig:
       service:
         namespace: {{ .Values.namespace }}
-        name: {{ .Values.admissionController.webhookService.appName }}-service
+        name: {{ .Values.admissionController.webhookService.appName }}
         path: {{ .Values.admissionController.webhookService.mutateEndpoint }}
         
     admissionReviewVersions: ["v1", "v1beta1"]
