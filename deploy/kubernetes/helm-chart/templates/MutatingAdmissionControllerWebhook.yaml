@@ -54,4 +54,4 @@ spec:
       volumes:
         - name: {{ .Values.admissionController.webhookService.volumes.tlsCertsVolumeName }}
           secret:
-            secretName: {{ .Values.admissionController.webhookService.appName }}-tls-secret
+            secretName: {{ .Values.admissionController.webhookService.appName }}-certificate

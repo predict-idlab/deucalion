@@ -21,7 +21,6 @@ webhooks:
         namespace: {{ .Values.namespace }}
         name: {{ .Values.admissionController.webhookService.appName }}-service
         path: {{ .Values.admissionController.webhookService.mutateEndpoint }}
-      caBundle: "{{ .Values.admissionController.webhookService.caBundle }}"
         
     admissionReviewVersions: ["v1", "v1beta1"]
     sideEffects: None
