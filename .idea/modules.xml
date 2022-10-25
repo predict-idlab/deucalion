@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/deucalion.iml" filepath="$PROJECT_DIR$/.idea/deucalion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../thesis-bavo/.idea/thesis-bavo.iml" filepath="$PROJECT_DIR$/../thesis-bavo/.idea/thesis-bavo.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,30 @@
+admissionController:
+  webhookService:
+    args:
+      defaultSidecarImage: "pimoens/deucalion-app:0.0.1"
+      serviceAccountName: "deucalion-sidecar-service-account"
+      alertName: "deucalion_anomaly_alert"
+      alertManagerPort: 9093
+
+    volumes: 
+      tlsCertsVolumeName: "webhook-tls-certs"
+    imagePullPolicy: "Always"
+    image: "pimoens/deucalion-sidecar-injector:0.0.1"
+    replicas: 1
+    mutateEndpoint: "/mutate"
+    appName: "deucalion-sidecar-injector"
+    
+
+  timeoutSeconds: 5
+  matchabel: "deucalion-injection"
+  matchLabelValue: "enabled"
+
+alertManager:
+  appName: "alert-manager"
+  replicas: 1
+  image: "prom/alertmanager:latest"
+  imagePullPolicy: "Always"
+  
+
+namespace: "deucalion-system"
+applicationNamespace: "sock-shop"
