@@ -1,0 +1,12 @@
+# Kubernetes (Sidecar)
+alert_manager:
+  alert_name: 'deucalion_event_alert'
+  host: 'alert-manager'
+  port: 9093
+
+config:
+  scrape_interval: 5
+
+  metric_provider: 'prometheus_targets'
+  target_provider: 'kubernetes'
+  targets: []

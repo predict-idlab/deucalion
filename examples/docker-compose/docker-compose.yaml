@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  alert-manager:
+    container_name: alert-manager
+    image: prom/alertmanager:latest
+    ports:
+      - 9093:9093
+
+  node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter:latest
+    ports:
+      - 9100:9100
+
+  deucalion-app:
+    container_name: deucalion-app
+    build:
+      context: ../anomalydetection
+    volumes:
+      - type: bind
+        source: ./deucalion_config.yaml
+        target: /etc/deucalion/config.yaml
+    depends_on:
+      - alert-manager
+      - node-exporter

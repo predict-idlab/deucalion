@@ -3,10 +3,10 @@ import os
 import time
 from multiprocessing import Pool
 import yaml
-from deucalion import Observer
-from deucalion.strategies import PrometheusFederated, PrometheusSidecar, StrategyFactory, StrategyType
-from urllib3.exceptions import MaxRetryError
 from optparse import OptionParser
+
+from deucalion import Observer
+from deucalion.strategies.factory import StrategyFactory, StrategyType
 
 
 class Provisioner:
@@ -33,7 +33,7 @@ class Provisioner:
         (options, args) = parser.parse_args()
         config_filename = options.config_filename
         if config_filename is None:
-            config_filename = '/etc/deucalion/deucalion_config.yaml'
+            config_filename = '/etc/deucalion/config.yaml'
 
         self.configure(config_filename)
 
@@ -54,14 +54,14 @@ class Provisioner:
                     file_found = True
                     config = yaml.safe_load(config_file)
 
-                    self.INTERVAL_ORIG = float(config['metrics_interval'])
+                    self.INTERVAL_ORIG = float(config['config']['metrics_interval'])
                     self.currentScrapeInterval = self.INTERVAL_ORIG
                     self.strategy.set_config(config['config'])
 
                     # AlertManager configuration from environment variables set by the sidecar injector
-                    self.alert_name = os.getenv('DEUCALION_ALERT_NAME')
-                    alert_manager_host = os.getenv('DEUCALION_ALERT_MANAGER_HOST')
-                    alert_manager_port = os.getenv('DEUCALION_ALERT_MANAGER_PORT')
+                    self.alert_name = config['alert_manager']['alert_name']
+                    alert_manager_host = config['alert_manager']['host']
+                    alert_manager_port = config['alert_manager']['port']
                     if self.alert_name is None or alert_manager_port is None or alert_manager_host is None:
                         self.logger.error('alert manager environment variables not set. Are you injecting this application with the deucalion sidecar injector?')
                         exit(1)

@@ -1,12 +1,13 @@
 from enum import Enum
 
-from deucalion.strategies import PrometheusFederated, PrometheusSidecar
+from deucalion.strategies import DirectTargetScraping, PrometheusServerQuerying, PrometheusTargetScraping
 
 
 class StrategyType(Enum):
     """Deucalion Strategy Types."""
-    PROMETHEUS_FEDERATED = 'prometheus_federated'
-    PROMETHEUS_SIDECAR = 'prometheus_sidecar'
+    DIRECT_TARGET_SCRAPING = 'direct_target_scraping'
+    PROMETHEUS_SERVER_QUERYING = 'prometheus_server_querying'
+    PROMETHEUS_TARGET_SCRAPING = 'prometheus_target_scraping'
 
     @classmethod
     def reverse_lookup(cls, value):
@@ -20,8 +21,9 @@ class StrategyType(Enum):
 class StrategyFactory:
     """Deucalion Strategy Factory."""
     types_ = {
-        StrategyType.PROMETHEUS_FEDERATED: PrometheusFederated,
-        StrategyType.PROMETHEUS_SIDECAR: PrometheusSidecar,
+        StrategyType.DIRECT_TARGET_SCRAPING: DirectTargetScraping,
+        StrategyType.PROMETHEUS_SERVER_QUERYING: PrometheusServerQuerying,
+        StrategyType.PROMETHEUS_TARGET_SCRAPING: PrometheusTargetScraping,
     }
 
     def get(self, type_: StrategyType):
@@ -31,4 +33,4 @@ class StrategyFactory:
         :return: Metric
         """
         cls = self.types_[type_]
-        return cls
+        return cls()

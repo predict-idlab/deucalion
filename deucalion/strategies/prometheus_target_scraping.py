@@ -8,10 +8,11 @@ from deucalion.strategies.strategy import Strategy
 from kubernetes import client, config
 
 
-class PrometheusFederated(Strategy):
+class PrometheusTargetScraping(Strategy):
+
     def __init__(self):
         self.namespace = None
-        self.logger = logging.getLogger('PrometheusFederated')
+        self.logger = logging.getLogger('PrometheusTargetScraping')
         self.metrics_path = None
         self.targets: [str] = None
         self.v1client = None

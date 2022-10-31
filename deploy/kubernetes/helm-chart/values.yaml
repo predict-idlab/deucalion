@@ -1,3 +1,5 @@
+namespace: "deucalion-system"
+
 alertManager:
   appName: "alert-manager"
   replicas: 1
@@ -12,6 +14,17 @@ certManager:
   groupName: "acme.ilabt.imec.be"
   serviceAccountName: cert-manager
 
+sidecar:
+  image:
+    name: "pimoens/deucalion-example"
+    tag: "latest"
+    pullPolicy: "Always"
+
+  strategy: "prometheus_sidecar"
+  scrape_interval: 15
+  serviceAccountName: "deucalion-injector-sa"
+  alertName: "deucalion_event"
+
 webhook:
   appName: "deucalion-injector"
   replicas: 1
@@ -20,14 +33,3 @@ webhook:
     name: "pimoens/deucalion-injector"
     tag: "latest"
     pullPolicy: "Always"
-
-  sidecar:
-    image:
-      name: "hello-world"
-      tag: "latest"
-      pullPolicy: "Always"
-
-    serviceAccountName: "deucalion-injector-sa"
-    alertName: "deucalion_event"
-
-namespace: "deucalion-system"

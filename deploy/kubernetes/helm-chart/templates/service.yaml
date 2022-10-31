@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 spec:
   selector:
-    app: deucalion-injector
+    app: {{ .Values.webhook.appName }}
   ports:
     - port: 443
       targetPort: tls

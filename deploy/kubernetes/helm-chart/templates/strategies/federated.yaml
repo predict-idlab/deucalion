@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: 'deucalion-prometheus-federated-configmap'
+data:
+  deucalion_config.yaml: |
+    metrics_interval: {{ .Values.sidecar.scrape_interval }}
+    type: 'prometheus_federated'
+    prometheus_port: 9090
+
+    alert_manager:
+      alert_name: '{{ .Values.sidecar.alertName }}'
+      host: '{{ .Values.alertManager.appName }}.{{ .Values.nameSpace }}.svc.cluster.local'
+      port: {{ .Values.alertManager.containerPort }}

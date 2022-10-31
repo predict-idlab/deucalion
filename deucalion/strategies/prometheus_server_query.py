@@ -2,14 +2,16 @@ import json
 import logging
 from typing import Dict, Set, Any
 import requests
-from deucalion.strategies import strategy
+
+from deucalion.strategies.strategy import Strategy
 
 
-class PrometheusSidecar(strategy):
-    def __init__(self):
-        self.logger = logging.getLogger('PrometheusSidecar')
+class PrometheusServerQuerying(Strategy):
+
+    def __init__(self,):
+        self.logger = logging.getLogger('PrometheusServerQuerying')
         self.targets = []
-        self.server_port = None
+        self.server_port = 9090
 
     def get_metrics(self, desired_metrics: Set[str]) -> Dict[str, Any]:
         self.targets = []

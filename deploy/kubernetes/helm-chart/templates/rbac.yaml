@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ .Values.webhook.sidecar.serviceAccountName }}
+  name: {{ .Values.sidecar.serviceAccountName }}
   namespace: {{ .Values.namespace }}
 automountServiceAccountToken: false
 ---
@@ -33,7 +33,7 @@ kind: ClusterRoleBinding
 metadata:
   name: {{ .Values.webhook.appName }}-role-binding
 subjects:
-  - name: {{ .Values.webhook.sidecar.serviceAccountName }}
+  - name: {{ .Values.sidecar.serviceAccountName }}
     namespace: {{ .Values.namespace }}
     kind: ServiceAccount
 roleRef:

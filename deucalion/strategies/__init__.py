@@ -1,3 +1,3 @@
-from deucalion.strategies.factory import StrategyType, StrategyFactory
-from deucalion.strategies.federated import PrometheusFederated
-from deucalion.strategies.sidecar import PrometheusSidecar
+from deucalion.strategies.direct_target_scraping import DirectTargetScraping
+from deucalion.strategies.prometheus_server_query import PrometheusServerQuerying
+from deucalion.strategies.prometheus_target_scraping import PrometheusTargetScraping

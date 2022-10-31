@@ -25,15 +25,15 @@ spec:
         args:
           - webhook
           - "--default-sidecar-image"
-          - "{{ .Values.webhook.sidecar.image.name }}:{{ .Values.webhook.sidecar.image.tag }}"
+          - "{{ .Values.sidecar.image.name }}:{{ .Values.sidecar.image.tag }}"
           - "--service-account-name"
-          - "{{ .Values.webhook.sidecar.serviceAccountName }}"
+          - "{{ .Values.sidecar.serviceAccountName }}"
           - "--alert-manager-port"
           - "{{ .Values.alertManager.containerPort }}"
           - "--alert-manager-host"
           - "{{ .Values.alertManager.appName }}.{{ .Values.namespace }}.svc.cluster.local"
           - "--alert-manager-alert-name"
-          - "{{ .Values.webhook.sidecar.alertName }}"
+          - "{{ .Values.sidecar.alertName }}"
         volumeMounts:
           - name: webhook-tls-certs
             mountPath: /etc/webhook/certs
