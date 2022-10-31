@@ -1,9 +1,11 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: {{ .Release.Name }}-{{ .Values.admissionController.webhookService.appName }}-admission-controller-configuration
+  name: {{ .Release.Name }}-{{ .Values.admissionController.webhookService.appName }}
+  annotations:
+    cert-manager.io/inject-ca-from: "{{ .Values.namespace }}/{{ .Values.admissionController.webhookService.appName }}-webhook-tls"
 webhooks:
-  - name: {{ .Values.admissionController.webhookService.appName }}-service.{{ .Values.namespace }}.svc.cluster.local
+  - name: {{ .Values.admissionController.webhookService.appName }}.{{ .Values.namespace }}.svc.cluster.local
     rules:
       - apiGroups:   [""]
         apiVersions: ["v1", "v1beta1"]

@@ -66,23 +66,23 @@ func applyPodPatch(ar v1.AdmissionReview, shouldPatchPod func(*corev1.Pod) bool,
 	}
 
 	preferredSidecarImage := sidecarImage
+	userDefinedConfigMapName := ""
 	if preferred, ok := pod.Annotations["deucalion-sidecar-image"]; ok {
 		preferredSidecarImage = preferred
-	}
 
-	var userDefinedConfigMapName string
-	if configMapName, ok := pod.Annotations["deucalion-config-map"]; ok {
-		userDefinedConfigMapName = configMapName
-	} else {
-		klog.Error("deucalion-config-map annotation not set! Not allowing pod creation. ")
-		return &v1.AdmissionResponse{
-			Allowed: false,
-			Result: &metav1.Status{
-				Status:  "Failure",
-				Message: "deucalion-config-map pod annotation not set. ",
-				Code:    500,
-			},
-		}
+        if configMapName, ok := pod.Annotations["deucalion-config-map"]; ok {
+            userDefinedConfigMapName = configMapName
+        } else {
+            klog.Error("deucalion-config-map annotation not set! Not allowing pod creation. ")
+            return &v1.AdmissionResponse{
+                Allowed: false,
+                Result: &metav1.Status{
+                    Status:  "Failure",
+                    Message: "deucalion-config-map pod annotation not set. ",
+                    Code:    500,
+                },
+            }
+        }
 	}
 
 	if preferredSidecarImage == "" {
@@ -104,9 +104,12 @@ func applyPodPatch(ar v1.AdmissionReview, shouldPatchPod func(*corev1.Pod) bool,
 	reviewResponse := v1.AdmissionResponse{}
 	reviewResponse.Allowed = true
 	if shouldPatchPod(&pod) {
+	    klog.Info("Patching")
 		reviewResponse.Patch = []byte(fmt.Sprintf(patch, userDefinedConfigMapName, preferredSidecarImage, alertManagerAlertName, alertManagerHost, alertManagerPort, serviceAccountName))
 		pt := v1.PatchTypeJSONPatch
 		reviewResponse.PatchType = &pt
+	} else {
+        klog.Info("Skipping")
 	}
 	return &reviewResponse
 }

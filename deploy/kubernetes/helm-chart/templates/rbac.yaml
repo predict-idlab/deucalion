@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.admissionController.webhookService.appName }}-sa
+automountServiceAccountToken: false
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: deucalion-sidecar-cluster-role
+rules:
+  - apiGroups:
+      - ""
+      - apps
+      - autoscaling
+      - batch
+      - extensions
+      - policy
+      - rbac.authorization.k8s.io
+    resources:
+      - pods
+      - componentstatuses
+      - deployments
+      - endpoints
+      - jobs
+      - nodes
+      - services
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: deucalion-sidecar-role-binding
+subjects:
+  - name: {{ .Values.admissionController.webhookService.args.serviceAccountName }}
+    namespace: {{ .Values.applicationNamespace }}
+    kind: ServiceAccount
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: deucalion-sidecar-cluster-role

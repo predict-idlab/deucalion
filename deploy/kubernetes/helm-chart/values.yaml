@@ -1,7 +1,18 @@
+alertManager:
+  appName: "alert-manager"
+  replicas: 1
+  image: "prom/alertmanager:latest"
+  imagePullPolicy: "Always"
+
+certManager:
+  namespace: cert-manager
+  groupName: "acme.ilabt.imec.be"
+  serviceAccountName: cert-manager
+
 admissionController:
   webhookService:
     args:
-      defaultSidecarImage: "pimoens/deucalion-app:0.0.1"
+      defaultSidecarImage: "hello-world::latest"
       serviceAccountName: "deucalion-service-account"
       alertName: "deucalion_event"
       alertManagerPort: 9093
@@ -17,12 +28,6 @@ admissionController:
   timeoutSeconds: 5
   matchabel: "deucalion-injection"
   matchLabelValue: "enabled"
-
-alertManager:
-  appName: "alert-manager"
-  replicas: 1
-  image: "prom/alertmanager:latest"
-  imagePullPolicy: "Always"
 
 namespace: "deucalion-system"
 applicationNamespace: "sock-shop"
