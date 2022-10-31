@@ -1,44 +1,44 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.admissionController.webhookService.appName }}
+  name: {{ .Values.webhook.appName }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ .Values.admissionController.webhookService.appName }}
+    app: {{ .Values.webhook.appName }}
 spec:
-  replicas: {{ .Values.admissionController.webhookService.replicas }}
+  replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.admissionController.webhookService.appName }}
+      app: {{ .Values.webhook.appName }}
   template:
     metadata:
       labels:
-        app: {{ .Values.admissionController.webhookService.appName }}
+        app: {{ .Values.webhook.appName }}
     spec:
       containers:
-      - name: {{ .Values.admissionController.webhookService.appName }}
-        image: {{ .Values.admissionController.webhookService.image }}
-        imagePullPolicy: {{ .Values.admissionController.webhookService.imagePullPolicy }}
+      - name: {{ .Values.webhook.appName }}
+        image: {{ .Values.webhook.image.name }}:{{ .Values.webhook.image.tag }}
+        imagePullPolicy: {{ .Values.webhook.image.pullPolicy }}
         ports:
         - containerPort: 443
           name: tls
         args:
           - webhook
           - "--default-sidecar-image"
-          - "{{ .Values.admissionController.webhookService.args.defaultSidecarImage }}"
+          - "{{ .Values.webhook.sidecar.image.name }}:{{ .Values.webhook.sidecar.image.tag }}"
           - "--service-account-name"
-          - "{{ .Values.admissionController.webhookService.args.serviceAccountName }}"
+          - "{{ .Values.webhook.sidecar.serviceAccountName }}"
           - "--alert-manager-port"
-          - "{{ .Values.admissionController.webhookService.args.alertManagerPort }}"
+          - "{{ .Values.alertManager.containerPort }}"
           - "--alert-manager-host"
           - "{{ .Values.alertManager.appName }}.{{ .Values.namespace }}.svc.cluster.local"
           - "--alert-manager-alert-name"
-          - "{{ .Values.admissionController.webhookService.args.alertName }}"
+          - "{{ .Values.webhook.sidecar.alertName }}"
         volumeMounts:
-          - name: {{ .Values.admissionController.webhookService.volumes.tlsCertsVolumeName }}
+          - name: webhook-tls-certs
             mountPath: /etc/webhook/certs
             readOnly: true
       volumes:
-        - name: {{ .Values.admissionController.webhookService.volumes.tlsCertsVolumeName }}
+        - name: webhook-tls-certs
           secret:
-            secretName: {{ .Values.admissionController.webhookService.appName }}-webhook-tls
+            secretName: deucalion-injector-webhook-tls

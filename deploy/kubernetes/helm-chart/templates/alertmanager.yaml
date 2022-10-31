@@ -7,7 +7,7 @@ spec:
   selector:
     app: {{ .Values.alertManager.appName }}
   ports:
-    - port: {{ .Values.admissionController.webhookService.args.alertManagerPort }}
+    - port: {{ .Values.alertManager.containerPort }}
       targetPort: http
       name: application
 ---
@@ -19,7 +19,7 @@ metadata:
   labels:
     app: {{ .Values.alertManager.appName }}
 spec:
-  replicas: {{ .Values.alertManager.replicas }}
+  replicas: 1
   selector:
     matchLabels:
       app: {{ .Values.alertManager.appName }}
@@ -30,8 +30,8 @@ spec:
     spec:
       containers:
       - name: {{ .Values.alertManager.appName }}
-        image: {{ .Values.alertManager.image }}
-        imagePullPolicy: {{ .Values.alertManager.imagePullPolicy }}
+        image: {{ .Values.alertManager.image.name }}:{{ .Values.alertManager.image.tag }}
+        imagePullPolicy: {{ .Values.alertManager.image.pullPolicy }}
         ports:
-        - containerPort: {{ .Values.admissionController.webhookService.args.alertManagerPort }}
+        - containerPort: {{ .Values.alertManager.containerPort }}
           name: http

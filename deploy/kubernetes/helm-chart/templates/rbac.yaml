@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ .Values.admissionController.webhookService.appName }}-sa
+  name: {{ .Values.webhook.sidecar.serviceAccountName }}
+  namespace: {{ .Values.namespace }}
 automountServiceAccountToken: false
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: deucalion-sidecar-cluster-role
+  name: {{ .Values.webhook.appName }}-cluster-role
 rules:
   - apiGroups:
       - ""
@@ -30,12 +31,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: deucalion-sidecar-role-binding
+  name: {{ .Values.webhook.appName }}-role-binding
 subjects:
-  - name: {{ .Values.admissionController.webhookService.args.serviceAccountName }}
-    namespace: {{ .Values.applicationNamespace }}
+  - name: {{ .Values.webhook.sidecar.serviceAccountName }}
+    namespace: {{ .Values.namespace }}
     kind: ServiceAccount
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: deucalion-sidecar-cluster-role
+  name: {{ .Values.webhook.appName }}-cluster-role

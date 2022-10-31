@@ -1,33 +1,33 @@
 alertManager:
   appName: "alert-manager"
   replicas: 1
-  image: "prom/alertmanager:latest"
-  imagePullPolicy: "Always"
+  image:
+    name: "prom/alertmanager"
+    tag: "latest"
+    pullPolicy: "Always"
+  containerPort: 9093
 
 certManager:
   namespace: cert-manager
   groupName: "acme.ilabt.imec.be"
   serviceAccountName: cert-manager
 
-admissionController:
-  webhookService:
-    args:
-      defaultSidecarImage: "hello-world::latest"
-      serviceAccountName: "deucalion-service-account"
-      alertName: "deucalion_event"
-      alertManagerPort: 9093
+webhook:
+  appName: "deucalion-injector"
+  replicas: 1
 
-    volumes: 
-      tlsCertsVolumeName: "webhook-tls-certs"
-    imagePullPolicy: "Always"
-    image: "pimoens/deucalion-injector:latest"
-    replicas: 1
-    mutateEndpoint: "/mutate"
-    appName: "deucalion-injector"
+  image:
+    name: "pimoens/deucalion-injector"
+    tag: "latest"
+    pullPolicy: "Always"
 
-  timeoutSeconds: 5
-  matchabel: "deucalion-injection"
-  matchLabelValue: "enabled"
+  sidecar:
+    image:
+      name: "hello-world"
+      tag: "latest"
+      pullPolicy: "Always"
+
+    serviceAccountName: "deucalion-injector-sa"
+    alertName: "deucalion_event"
 
 namespace: "deucalion-system"
-applicationNamespace: "sock-shop"

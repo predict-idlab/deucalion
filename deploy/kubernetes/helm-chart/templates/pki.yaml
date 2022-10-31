@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: {{ .Values.admissionController.webhookService.appName }}-selfsign
+  name: {{ .Values.webhook.appName }}-selfsign
   namespace: {{ .Values.namespace }}
 spec:
   selfSigned: {}
@@ -9,45 +9,45 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ .Values.admissionController.webhookService.appName }}-ca
+  name: {{ .Values.webhook.appName }}-ca
   namespace: {{ .Values.namespace }}
   labels:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  secretName: {{ .Values.admissionController.webhookService.appName }}-ca
+  secretName: {{ .Values.webhook.appName }}-ca
   duration: 43800h # 5y
   issuerRef:
-    name: {{ .Values.admissionController.webhookService.appName }}-selfsign
+    name: {{ .Values.webhook.appName }}-selfsign
   commonName: "ca.deucalion-injector.cert-manager"
   isCA: true
 ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: {{ .Values.admissionController.webhookService.appName }}-ca
+  name: {{ .Values.webhook.appName }}-ca
   namespace: {{ .Values.namespace }}
   labels:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   ca:
-    secretName: {{ .Values.admissionController.webhookService.appName }}-ca
+    secretName: {{ .Values.webhook.appName }}-ca
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ .Values.admissionController.webhookService.appName }}-webhook-tls
+  name: {{ .Values.webhook.appName }}-webhook-tls
   namespace: {{ .Values.namespace }}
 spec:
-  secretName: {{ .Values.admissionController.webhookService.appName }}-webhook-tls
+  secretName: {{ .Values.webhook.appName }}-webhook-tls
   duration: 8760h # 1y
   # At least one of a DNS Name, URI, or IP address is required.
   dnsNames:
-    - {{ .Values.admissionController.webhookService.appName }}
-    - {{ .Values.admissionController.webhookService.appName }}.{{ .Values.namespace }}
-    - {{ .Values.admissionController.webhookService.appName }}.{{ .Values.namespace }}.svc
-    - {{ .Values.admissionController.webhookService.appName }}.{{ .Values.namespace }}.svc.cluster.local
+    - {{ .Values.webhook.appName }}
+    - {{ .Values.webhook.appName }}.{{ .Values.namespace }}
+    - {{ .Values.webhook.appName }}.{{ .Values.namespace }}.svc
+    - {{ .Values.webhook.appName }}.{{ .Values.namespace }}.svc.cluster.local
   # Issuer references are always required.
   issuerRef:
-    name: {{ .Values.admissionController.webhookService.appName }}-ca
+    name: {{ .Values.webhook.appName }}-ca

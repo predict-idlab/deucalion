@@ -69,9 +69,6 @@ func init() {
 		"The name of the alert the deucalion sidecars will use to push an alert to the alert manager. ")
 
 	CmdWebhook.MarkFlagRequired("service-account-name")
-	//CmdWebhook.MarkFlagRequired("alert-manager-port")
-	//CmdWebhook.MarkFlagRequired("alert-manager-host")
-	//CmdWebhook.MarkFlagRequired("alert-manager-alert-name") // is dit wel een verstndige keuze om een vaste alert naam te gebruiken?
 }
 
 // admitv1beta1Func handles a v1beta1 admission
