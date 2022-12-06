@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/predict-idlab/deucalion/injector/webhook"
+	"deucalion/injector/webhook"
 	"github.com/spf13/cobra"
 	"k8s.io/component-base/cli"
 	"os"

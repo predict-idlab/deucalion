@@ -1,5 +1,4 @@
 from typing import Dict, Any, Set
-from time import sleep
 
 import deucalion as dc
 from deucalion.strategies.factory import StrategyType

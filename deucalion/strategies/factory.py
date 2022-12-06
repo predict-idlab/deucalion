@@ -28,8 +28,8 @@ class StrategyFactory:
 
     def get(self, type_: StrategyType):
         """
-        Retrieve a recommender.
-        :param type_: RecommenderType
+        Retrieve a strategy.
+        :param type_: StrategyType
         :return: Metric
         """
         cls = self.types_[type_]

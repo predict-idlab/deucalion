@@ -1,4 +1,4 @@
-module github.com/predict-idlab/deucalion/injector
+module deucalion/injector
 
 go 1.19
 

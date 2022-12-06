@@ -16,7 +16,7 @@ certManager:
 
 sidecar:
   image:
-    name: "pimoens/deucalion-example"
+    name: "deucalion-example"
     tag: "latest"
     pullPolicy: "Always"
 
@@ -30,6 +30,6 @@ webhook:
   replicas: 1
 
   image:
-    name: "pimoens/deucalion-injector"
+    name: "deucalion-injector"
     tag: "latest"
     pullPolicy: "Always"

@@ -1,7 +1,7 @@
 # Kubernetes (Federated)
 alert_manager:
   alert_name: 'deucalion_event_alert'
-  host: 'alert-manager'
+  host: 'alert-manager.monitoring.svc.cluster.local'
   port: 9093
 
 config:
@@ -9,4 +9,3 @@ config:
 
   metric_provider: 'prometheus_server'
   target_provider: 'kubernetes'
-  targets: []

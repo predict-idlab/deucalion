@@ -4,8 +4,9 @@ metadata:
   name: 'deucalion-prometheus-sidecar-configmap'
 data:
   deucalion_config.yaml: |
-    scrape_interval: {{ .Values.sidecar.scrape_interval }}
-    type: 'prometheus_sidecar'
+    config:
+      scrape_interval: {{ .Values.sidecar.scrape_interval }}
+      type: 'prometheus_sidecar'
 
     alert_manager:
       alert_name: '{{ .Values.sidecar.alertName }}'
