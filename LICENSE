@@ -1,7 +1,3 @@
-Copyright (c) Pieter Moens,
-2022 Ghent University and IMEC vzw with offices at Technologiepark 15, 9052 Ghent,
-Belgium - Contact info: http://predict.idlab.ugent.be
-
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
 the Software for non-commercial educational and research use, including without
@@ -17,7 +13,7 @@ is furnished to do so, subject to the following conditions:
    research. Usage by non-academic parties is allowed in a strict research
    environment only. The use of the results of the research for commercial
    purposes or inclusion in commercial activities requires the permission of
-   Ghent University and IMEC vzw.
+   the authors.
 
 3. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
