@@ -80,7 +80,7 @@ spec:
     metadata:
       annotations: 
         deucalion-config-map: deucalion-sidecar-config-map
-        deucalion-sidecar-image: "bavoandriessen/deucalion-app:evaluation"
+        deucalion-sidecar-image: "deucalion-app:evaluation"
       labels:
         app: details
         version: v1
@@ -136,7 +136,7 @@ spec:
     metadata:
       annotations: 
         deucalion-config-map: deucalion-sidecar-config-map
-        deucalion-sidecar-image: "bavoandriessen/deucalion-app:evaluation"
+        deucalion-sidecar-image: "deucalion-app:evaluation"
       labels:
         app: ratings
         version: v1
@@ -192,7 +192,7 @@ spec:
     metadata:
       annotations: 
         deucalion-config-map: deucalion-sidecar-config-map
-        deucalion-sidecar-image: "bavoandriessen/deucalion-app:evaluation"
+        deucalion-sidecar-image: "deucalion-app:evaluation"
       labels:
         app: reviews
         version: v1
@@ -237,7 +237,7 @@ spec:
     metadata:
       annotations: 
         deucalion-config-map: deucalion-sidecar-config-map
-        deucalion-sidecar-image: "bavoandriessen/deucalion-app:evaluation"
+        deucalion-sidecar-image: "deucalion-app:evaluation"
       labels:
         app: reviews
         version: v2
@@ -282,7 +282,7 @@ spec:
     metadata:
       annotations: 
         deucalion-config-map: deucalion-sidecar-config-map
-        deucalion-sidecar-image: "bavoandriessen/deucalion-app:evaluation"
+        deucalion-sidecar-image: "deucalion-app:evaluation"
       labels:
         app: reviews
         version: v3
@@ -353,7 +353,7 @@ spec:
     metadata:
       annotations: 
         deucalion-config-map: deucalion-sidecar-config-map
-        deucalion-sidecar-image: "bavoandriessen/deucalion-app:evaluation"
+        deucalion-sidecar-image: "deucalion-app:evaluation"
       labels:
         app: productpage
         version: v1

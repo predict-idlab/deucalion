@@ -182,7 +182,7 @@ spec:
     metadata:
       annotations: 
         deucalion-config-map: deucalion-sidecar-config-map
-        deucalion-sidecar-image: "bavoandriessen/deucalion-app:evaluation"
+        deucalion-sidecar-image: "deucalion-app:evaluation"
       labels:
         component: "server"
         app: prometheus1
@@ -363,7 +363,7 @@ spec:
     metadata:
       annotations: 
         deucalion-config-map: deucalion-sidecar-config-map
-        deucalion-sidecar-image: "bavoandriessen/deucalion-app:evaluation"
+        deucalion-sidecar-image: "deucalion-app:evaluation"
       labels:
         component: "server"
         app: prometheus2
