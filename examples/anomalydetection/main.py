@@ -12,13 +12,13 @@ class AnomalyDetector(dc.Observer):
     def on_next(self, data: Dict[str, Dict[str, Any]]):
         if len(data):
             for target in data:
-                print("new data from target: " + target)
+                print('new data from target: ' + target)
                 print(data[target])
                 # pred = self.model.predict(targets_data_dict[target])
                 # print(target + ': ' + str(targets_data_dict[target].index[0]) + ', anomaly score: ' + str(pred))
         else:
-            print("Data object received was empty")
-        return 'ups' # TODO: anomaly rate (percentage for overhead testing) eventueel variabel anomaly rate
+            print('Data object received was empty')
+        return 'ups'  # TODO: anomaly rate (percentage for overhead testing)
         # TODO: create alert return body instead of just value
 
 
