@@ -6,10 +6,17 @@ Monorepo containing:
 - [deucalion/injector](injector): Kubernetes sidecar injector
 
 
-### Citation
+## Citation
 
-@inproceedings{moens2023edge,
-  title={Edge anomaly detection framework for AIOps in Cloud and IoT},
-  author={Moens, Pieter and Andriessen, B and Sebrechts, Merlijn and Volckaert, Bruno and Van Hoecke, Sofie},
-  year={2023}
+@conference{moens2023edge,
+  author={Pieter Moens. and Bavo Andriessen. and Merlijn Sebrechts. and Bruno Volckaert. and Sofie {Van Hoecke}.},
+  title={Edge Anomaly Detection Framework for AIOps in Cloud and IoT},
+  booktitle={Proceedings of the 13th International Conference on Cloud Computing and Services Science - CLOSER},
+  year={2023},
+  pages={204-211},
+  publisher={SciTePress},
+  organization={INSTICC},
+  doi={10.5220/0011838600003488},
+  isbn={978-989-758-650-7},
+  issn={2184-5042},
 }
